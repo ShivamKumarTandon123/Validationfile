@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QC Result</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h2, h3 { color: #333; }
+        ul { list-style: disc; margin-left: 20px; }
+        .ok { color: green; }
+        .warn { color: orange; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h2>Quality Check Results</h2>
+    <p><strong>File:</strong> {{ filename }}</p>
+
+    <h3>1. Font Name Issues</h3>
+    <ul>
+        {% for issue in result.font_name_issues %}
+        <li class="error">{{ issue }}</li>
+        {% else %}
+        <li class="ok">All fonts use 'Times New Roman'</li>
+        {% endfor %}
+    </ul>
+
+    <h3>2. Font Size Issues</h3>
+    <ul>
+        {% for issue in result.font_size_issues %}
+        <li class="error">{{ issue }}</li>
+        {% else %}
+        <li class="ok">All fonts use 12pt size</li>
+        {% endfor %}
+    </ul>
+
+    <h3>2. Table Font Size Issues</h3>
+    <ul>
+        {% for issue in result.table_font_issues %}
+        <li class="warn">{{ issue }}</li>
+        {% else %}
+        <li class="ok">No table font size issues detected</li>
+        {% endfor %}
+    </ul>
+
+    <h3>3. Page Orientation</h3>
+    <ul>
+        {% for issue in result.orientation_issues %}
+        <li class="error">{{ issue }}</li>
+        {% else %}
+        <li class="ok">All pages are in portrait orientation</li>
+        {% endfor %}
+    </ul>
+
+    <h3>4. Table of Contents (TOC)</h3>
+    <ul>
+        <li><strong>TOC Present:</strong> {{ result.toc_check.toc_present }}</li>
+        <li><strong>Total TOC Links Found:</strong> {{ result.toc_check.total_links_in_toc }}</li>
+        <li><strong>Valid Links:</strong> {{ result.toc_check.valid_links }}</li>
+        <li><strong>Broken Links:</strong> {{ result.toc_check.broken_links }}</li>
+        {% if result.toc_check.broken_anchor_ids %}
+            <li class="error">Broken Anchor IDs:
+                <ul>
+                    {% for anchor in result.toc_check.broken_anchor_ids %}
+                    <li>{{ anchor }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endif %}
+    </ul>
+
+    <!-- Margins -->
+    <h3>6. Margin Check</h3>
+    <ul>
+        {% for issue in result.margin_errors %}
+        <li class="error">{{ issue }}</li>
+        {% endfor %}
+        {% for issue in result.margin_warnings %}
+        <li class="warn">{{ issue }}</li>
+        {% endfor %}
+        {% if not result.margin_errors and not result.margin_warnings %}
+        <li class="ok">All margins are correctly set to 1 inch</li>
+        {% endif %}
+    </ul>
+
+    <!-- Header/Footer Distance -->
+    <h3>7. Header/Footer Distance</h3>
+    <ul>
+        {% for issue in result.header_footer_errors %}
+        <li class="error">{{ issue }}</li>
+        {% else %}
+        <li class="ok">Header and footer distances meet minimum 0.38 inch requirement</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Internal Links -->
+    <h3>8. Internal Hyperlinks</h3>
+    <ul>
+        {% for issue in result.internal_link_issues %}
+        <li class="error">{{ issue }}</li>
+        {% else %}
+        <li class="ok">All internal links point to valid sections</li>
+        {% endfor %}
+    </ul>
+
+    <!-- External Links -->
+    <h3>9. External Hyperlinks</h3>
+    <ul>
+        {% for issue in result.external_link_issues %}
+        <li class="error">{{ issue }}</li>
+        {% else %}
+        <li class="ok">All external links are valid and reachable</li>
+        {% endfor %}
+    </ul>
+
+    <br><a href="/">⬅ Upload another file</a>
+</body>
+</html>

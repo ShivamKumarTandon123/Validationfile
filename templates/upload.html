@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Word Document</title>
+</head>
+<body>
+    <h2>Upload .docx file for QC checks</h2>
+    <form method="POST" action="/upload" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".docx" required><br><br>
+        <button type="submit">Upload and Analyze</button>
+    </form>
+</body>
+</html>
