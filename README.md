@@ -28,30 +28,6 @@ The tool allows users to upload a `.docx` file and receive a detailed JSON+HTML 
 
 ---
 
-## 🚀 Getting Started
-
-### 1. Clone the Repo
-
-```bash
-git https://github.com/didthon/TylerWordDocxValidation
-cd TylerWordDocxValidation
-```
-
-### 2. Install Dependencies
-Make sure you have Python 3.7+ installed.
-
-```bash
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-### 3. Run the Flask App
-```bash
-python app.py
-Open your browser and go to: http://127.0.0.1:5000
-```
-
 ## 📂 Project Structure
 ```bash
 .
