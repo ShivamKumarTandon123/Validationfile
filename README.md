@@ -32,7 +32,7 @@ The tool allows users to upload a `.docx` file and receive a detailed JSON+HTML 
 1. Install dependencies:
    ```bash
    pip install flask python-docx requests
-2. Run
+2. Run:
    python app.py
 3. Visit local address as outputted by terminal
    
